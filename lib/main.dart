@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:ligo_app/core/di/service_locator.dart';
 
 void main() {
+  setupDependencies();
   runApp(const MyApp());
 }
 
