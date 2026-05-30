@@ -1,8 +1,26 @@
+import 'package:ligo_app/core/environment/environment_exception.dart';
+
 /// Provides access to compile-time environment variables.
 ///
 /// Values are injected through `--dart-define` or
 /// `--dart-define-from-file`.
 abstract final class Environment {
+  Environment._();
+
   /// Base URL of the REST API.
-  static const apiUrl = String.fromEnvironment('API_URL');
+  static final String apiUrl = _requiredEnv('API_URL');
+
+  static String _requiredEnv(String name) {
+    final value = String.fromEnvironment(name);
+
+    if (value.isEmpty) {
+      throw EnvironmentVarNotFoundException(
+        message:
+            'Required environment variable "$name" was not provided. '
+            'Pass it using --dart-define or --dart-define-from-file.',
+      );
+    }
+
+    return value;
+  }
 }
