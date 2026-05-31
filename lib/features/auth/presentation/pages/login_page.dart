@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ligo_app/core/extensions/localization_extension.dart';
 import 'package:ligo_app/core/theme/ligo_spacing.dart';
 import 'package:ligo_app/core/widgets/widgets.dart';
 import 'package:ligo_app/features/auth/presentation/assets/auth_assets.dart';
@@ -39,7 +40,7 @@ class LoginPage extends StatelessWidget {
                 const SizedBox(height: LigoSpacing.l),
 
                 LigoTextFormField(
-                  hintText: 'Email',
+                  hintText: context.localized.helloWorld,
                   keyboardType: TextInputType.emailAddress,
                   onChanged: (value) {},
                 ),
