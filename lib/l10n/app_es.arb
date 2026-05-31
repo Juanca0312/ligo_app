@@ -1,3 +1,6 @@
 {
-    "helloWorld": "Hola Mundo!"
+    "helloWorld": "Hola Mundo!",
+    "email": "Correo",
+    "password": "Contraseña",
+    "login": "Iniciar sesión"
 }

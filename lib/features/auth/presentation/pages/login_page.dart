@@ -40,7 +40,7 @@ class LoginPage extends StatelessWidget {
                 const SizedBox(height: LigoSpacing.l),
 
                 LigoTextFormField(
-                  hintText: context.localized.helloWorld,
+                  hintText: context.localized.email,
                   keyboardType: TextInputType.emailAddress,
                   onChanged: (value) {},
                 ),
@@ -48,7 +48,7 @@ class LoginPage extends StatelessWidget {
                 const SizedBox(height: LigoSpacing.m),
 
                 LigoTextFormField(
-                  hintText: 'Password',
+                  hintText: context.localized.password,
                   obscureText: true,
                   onChanged: (value) {},
                 ),
@@ -57,7 +57,7 @@ class LoginPage extends StatelessWidget {
 
                 LigoButton(
                   onPressed: () {},
-                  text: 'Login',
+                  text: context.localized.login,
                 ),
               ],
             ),

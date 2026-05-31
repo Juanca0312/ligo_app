@@ -99,6 +99,24 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Hola Mundo!'**
   String get helloWorld;
+
+  /// No description provided for @email.
+  ///
+  /// In es, this message translates to:
+  /// **'Correo'**
+  String get email;
+
+  /// No description provided for @password.
+  ///
+  /// In es, this message translates to:
+  /// **'Contraseña'**
+  String get password;
+
+  /// No description provided for @login.
+  ///
+  /// In es, this message translates to:
+  /// **'Iniciar sesión'**
+  String get login;
 }
 
 class _AppLocalizationsDelegate
