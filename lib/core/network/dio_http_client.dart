@@ -12,7 +12,7 @@ class DioHttpClient implements IHttpClient {
   final Dio dio;
 
   @override
-  Future<HttpResponse> get(
+  Future<HttpResponse<T>> get<T>(
     String path, {
     Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
@@ -24,8 +24,8 @@ class DioHttpClient implements IHttpClient {
         options: Options(headers: headers),
       );
 
-      return HttpResponse(
-        data: response.data,
+      return HttpResponse<T>(
+        data: response.data as T,
         statusCode: response.statusCode ?? 200,
       );
     } on DioException catch (e) {
@@ -37,7 +37,7 @@ class DioHttpClient implements IHttpClient {
   }
 
   @override
-  Future<HttpResponse> post(
+  Future<HttpResponse<T>> post<T>(
     String path, {
     Object? data,
     Map<String, dynamic>? headers,
@@ -49,8 +49,8 @@ class DioHttpClient implements IHttpClient {
         options: Options(headers: headers),
       );
 
-      return HttpResponse(
-        data: response.data,
+      return HttpResponse<T>(
+        data: response.data as T,
         statusCode: response.statusCode ?? 200,
       );
     } on DioException catch (e) {
