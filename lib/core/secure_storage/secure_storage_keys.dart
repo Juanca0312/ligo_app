@@ -2,4 +2,7 @@
 abstract final class SecureStorageKeys {
   /// Key for storing the authentication token securely.
   static const token = 'token';
+
+  /// Key for storing the user information securely.
+  static const user = 'user';
 }
