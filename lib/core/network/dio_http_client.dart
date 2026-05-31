@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:ligo_app/core/network/app_exception.dart';
+import 'package:ligo_app/core/network/error_mapper.dart';
 import 'package:ligo_app/core/network/http_client.dart';
 import 'package:ligo_app/core/network/http_response.dart';
 
@@ -16,24 +17,19 @@ class DioHttpClient implements IHttpClient {
     String path, {
     Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
-  }) async {
-    try {
-      final response = await dio.get<dynamic>(
+  }) {
+    return _request<T>(
+      () => dio.get<dynamic>(
         path,
         queryParameters: queryParameters,
-        options: Options(headers: headers),
-      );
-
-      return HttpResponse<T>(
-        data: response.data as T,
-        statusCode: response.statusCode ?? 200,
-      );
-    } on DioException catch (e) {
-      throw ApiException(
-        message: _message(e),
-        statusCode: e.response?.statusCode,
-      );
-    }
+        options: Options(
+          headers: {
+            ...dio.options.headers,
+            ...?headers,
+          },
+        ),
+      ),
+    );
   }
 
   @override
@@ -41,37 +37,40 @@ class DioHttpClient implements IHttpClient {
     String path, {
     Object? data,
     Map<String, dynamic>? headers,
-  }) async {
-    try {
-      final response = await dio.post<dynamic>(
+  }) {
+    return _request<T>(
+      () => dio.post<dynamic>(
         path,
         data: data,
-        options: Options(headers: headers),
-      );
+        options: Options(
+          headers: {
+            ...dio.options.headers,
+            ...?headers,
+          },
+        ),
+      ),
+    );
+  }
+
+  /// Centralized request handler to avoid duplication.
+  Future<HttpResponse<T>> _request<T>(
+    Future<Response<dynamic>> Function() call,
+  ) async {
+    try {
+      final response = await call();
 
       return HttpResponse<T>(
         data: response.data as T,
         statusCode: response.statusCode ?? 200,
       );
     } on DioException catch (e) {
-      throw ApiException(
-        message: _message(e),
-        statusCode: e.response?.statusCode,
+      throw DioExceptionMapper.map(e);
+    } catch (e) {
+      throw AppException(
+        type: AppErrorType.unknown,
+        message: e.toString(),
+        original: e,
       );
     }
-  }
-
-  String _message(DioException e) {
-    final data = e.response?.data;
-
-    if (data is Map<String, dynamic>) {
-      final message = data['message'];
-
-      if (message is String && message.isNotEmpty) {
-        return message;
-      }
-    }
-
-    return e.message ?? 'Unexpected error';
   }
 }

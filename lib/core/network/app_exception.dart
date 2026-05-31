@@ -1,12 +1,49 @@
-/// Defines a custom exception for API-related errors,
-/// encapsulating an error message and an optional HTTP status code.
-class ApiException implements Exception {
-  /// Creates a new instance of [ApiException]
-  ApiException({required this.message, this.statusCode});
+/// Excepción base de la aplicación para representar errores controlados.
+class AppException implements Exception {
+  /// Constructs an [AppException] with the specified type and optional details.
+  const AppException({
+    required this.type,
+    this.message,
+    this.statusCode,
+    this.original,
+  });
 
-  /// The error message describing the exception.
-  final String message;
+  /// Tipo de error que categoriza la excepción.
+  final AppErrorType type;
 
-  /// The optional HTTP status code associated with the error.
+  /// Mensaje opcional descriptivo del error.
+  final String? message;
+
+  /// Código de estado HTTP asociado, si aplica.
   final int? statusCode;
+
+  /// Error original capturado
+  final Object? original;
+}
+
+/// Tipos de errores manejados por la aplicación.
+enum AppErrorType {
+  /// Problemas de conectividad.
+  network,
+
+  /// Tiempo de espera agotado.
+  timeout,
+
+  /// Error del servidor (5xx).
+  server,
+
+  /// Usuario no autorizado o token inválido.
+  unauthorized,
+
+  /// Petición inválida (400).
+  badRequest,
+
+  /// Recurso no encontrado (404).
+  notFound,
+
+  /// Petición cancelada.
+  cancelled,
+
+  /// Error no clasificado.
+  unknown,
 }
