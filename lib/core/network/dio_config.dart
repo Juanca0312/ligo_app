@@ -1,11 +1,12 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:ligo_app/core/environment/environment.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 /// Factory class for creating and configuring Dio instance used in the app.
 class DioConfig {
   /// Creates and configures a Dio instance with settings and interceptors.
-  static Dio create() {
+  static Dio create(List<Interceptor> interceptors) {
     final dio = Dio(
       BaseOptions(
         baseUrl: Environment.apiUrl,
@@ -17,12 +18,15 @@ class DioConfig {
       ),
     );
 
-    dio.interceptors.add(
-      PrettyDioLogger(
-        requestHeader: true,
-        requestBody: true,
-      ),
-    );
+    dio.interceptors.addAll(interceptors);
+    if (kDebugMode) {
+      dio.interceptors.add(
+        PrettyDioLogger(
+          requestHeader: true,
+          requestBody: true,
+        ),
+      );
+    }
 
     return dio;
   }

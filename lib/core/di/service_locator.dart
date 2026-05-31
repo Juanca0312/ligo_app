@@ -4,6 +4,7 @@ import 'package:get_it/get_it.dart';
 import 'package:ligo_app/core/network/dio_config.dart';
 import 'package:ligo_app/core/network/dio_http_client.dart';
 import 'package:ligo_app/core/network/http_client.dart';
+import 'package:ligo_app/core/network/interceptors/auth_interceptor.dart';
 import 'package:ligo_app/core/secure_storage/secure_storage_service.dart';
 import 'package:ligo_app/core/secure_storage/secure_storage_service_impl.dart';
 import 'package:ligo_app/core/session_manager/session_manager.dart';
@@ -16,8 +17,11 @@ final GetIt getIt = GetIt.instance;
 void setupDependencies() {
   // Core
   getIt
+    ..registerLazySingleton<AuthInterceptor>(
+      () => AuthInterceptor(getIt<ISessionManager>()),
+    )
     ..registerLazySingleton<Dio>(
-      DioConfig.create,
+      () => DioConfig.create([getIt<AuthInterceptor>()]),
     )
     ..registerLazySingleton<IHttpClient>(
       () => DioHttpClient(getIt<Dio>()),
