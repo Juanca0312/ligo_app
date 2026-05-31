@@ -1,8 +1,11 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:ligo_app/core/network/dio_config.dart';
 import 'package:ligo_app/core/network/dio_http_client.dart';
 import 'package:ligo_app/core/network/http_client.dart';
+import 'package:ligo_app/core/secure_storage/secure_storage_service.dart';
+import 'package:ligo_app/core/secure_storage/secure_storage_service_impl.dart';
 
 /// Service locator for dependency injection using GetIt.
 final GetIt getIt = GetIt.instance;
@@ -16,5 +19,8 @@ void setupDependencies() {
     )
     ..registerLazySingleton<IHttpClient>(
       () => DioHttpClient(getIt<Dio>()),
+    )
+    ..registerLazySingleton<ISecureStorageService>(
+      () => SecureStorageServiceImpl(const FlutterSecureStorage()),
     );
 }
