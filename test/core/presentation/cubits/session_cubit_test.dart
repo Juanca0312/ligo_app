@@ -1,8 +1,8 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ligo_app/core/presentation/cubits/session/session_cubit.dart';
 import 'package:ligo_app/core/session_manager/session.dart';
 import 'package:ligo_app/core/session_manager/session_manager.dart';
-import 'package:ligo_app/features/auth/domain/cubits/session/session_cubit.dart';
 import 'package:ligo_app/features/auth/domain/entities/session_status.dart';
 import 'package:mocktail/mocktail.dart';
 

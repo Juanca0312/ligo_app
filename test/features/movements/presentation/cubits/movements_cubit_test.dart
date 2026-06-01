@@ -5,10 +5,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ligo_app/core/common/request_status.dart';
 import 'package:ligo_app/core/common/result.dart';
 import 'package:ligo_app/core/errors/failure.dart';
-import 'package:ligo_app/features/movements/domain/cubits/movements/movements_cubit.dart';
 import 'package:ligo_app/features/movements/domain/entities/movement.dart';
 import 'package:ligo_app/features/movements/domain/entities/movement_filter.dart';
 import 'package:ligo_app/features/movements/domain/repositories/movement_repository.dart';
+import 'package:ligo_app/features/movements/presentation/cubits/movements/movements_cubit.dart';
 import 'package:mocktail/mocktail.dart';
 
 class MockMovementsRepository extends Mock implements MovementsRepository {}

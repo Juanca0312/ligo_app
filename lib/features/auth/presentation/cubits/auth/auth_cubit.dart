@@ -6,7 +6,7 @@ import 'package:ligo_app/core/common/form_item.dart';
 import 'package:ligo_app/core/common/request_status.dart';
 import 'package:ligo_app/core/common/result.dart';
 import 'package:ligo_app/core/errors/failure.dart';
-import 'package:ligo_app/features/auth/domain/cubits/session/session_cubit.dart';
+import 'package:ligo_app/core/presentation/cubits/session/session_cubit.dart';
 import 'package:ligo_app/features/auth/domain/repositories/auth_repository.dart';
 import 'package:ligo_app/features/auth/domain/validators/auth_validators.dart';
 

@@ -3,11 +3,11 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ligo_app/core/common/request_status.dart';
 import 'package:ligo_app/core/common/result.dart';
 import 'package:ligo_app/core/errors/failure.dart';
+import 'package:ligo_app/core/presentation/cubits/session/session_cubit.dart';
 import 'package:ligo_app/core/session_manager/session.dart';
-import 'package:ligo_app/features/auth/domain/cubits/auth/auth_cubit.dart';
-import 'package:ligo_app/features/auth/domain/cubits/session/session_cubit.dart';
 import 'package:ligo_app/features/auth/domain/repositories/auth_repository.dart';
 import 'package:ligo_app/features/auth/domain/validators/login_form_validator.dart';
+import 'package:ligo_app/features/auth/presentation/cubits/auth/auth_cubit.dart';
 import 'package:mocktail/mocktail.dart';
 
 class MockAuthRepository extends Mock implements AuthRepository {}

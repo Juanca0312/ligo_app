@@ -1,5 +1,5 @@
 import 'package:go_router/go_router.dart';
-import 'package:ligo_app/core/widgets/pages/splash_page.dart';
+import 'package:ligo_app/core/presentation/widgets/pages/splash_page.dart';
 import 'package:ligo_app/features/auth/presentation/routes/auth_router.dart';
 import 'package:ligo_app/features/movements/presentation/routes/movements_router.dart';
 

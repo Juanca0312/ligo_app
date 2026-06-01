@@ -3,13 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ligo_app/core/common/ligo_assets.dart';
 import 'package:ligo_app/core/extensions/localization_extension.dart';
+import 'package:ligo_app/core/presentation/widgets/widgets.dart';
 import 'package:ligo_app/core/theme/ligo_color.dart';
 import 'package:ligo_app/core/theme/ligo_spacing.dart';
-import 'package:ligo_app/core/widgets/widgets.dart';
-import 'package:ligo_app/features/movements/domain/cubits/movements/movements_cubit.dart';
 import 'package:ligo_app/features/movements/domain/entities/movement.dart';
 import 'package:ligo_app/features/movements/domain/entities/movement_status.dart';
 import 'package:ligo_app/features/movements/domain/entities/movement_type.dart';
+import 'package:ligo_app/features/movements/presentation/cubits/movements/movements_cubit.dart';
 
 /// Page that displays the details of a movement.
 class MovementDetailPage extends StatelessWidget {

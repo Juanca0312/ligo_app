@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ligo_app/core/extensions/localization_extension.dart';
+import 'package:ligo_app/core/presentation/cubits/session/session_cubit.dart';
+import 'package:ligo_app/core/presentation/widgets/widgets.dart';
 import 'package:ligo_app/core/theme/ligo_color.dart';
 import 'package:ligo_app/core/theme/ligo_spacing.dart';
-import 'package:ligo_app/core/widgets/widgets.dart';
-import 'package:ligo_app/features/auth/domain/cubits/session/session_cubit.dart';
 import 'package:ligo_app/features/auth/presentation/routes/auth_routes.dart';
-import 'package:ligo_app/features/movements/domain/cubits/movements/movements_cubit.dart';
 import 'package:ligo_app/features/movements/domain/entities/movement_filter.dart';
+import 'package:ligo_app/features/movements/presentation/cubits/movements/movements_cubit.dart';
 import 'package:ligo_app/features/movements/presentation/routes/movements_routes.dart';
 import 'package:ligo_app/features/movements/presentation/widgets/widgets.dart';
 

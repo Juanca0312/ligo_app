@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ligo_app/core/extensions/localization_extension.dart';
+import 'package:ligo_app/core/presentation/widgets/widgets.dart';
 import 'package:ligo_app/core/theme/ligo_color.dart';
 import 'package:ligo_app/core/theme/ligo_spacing.dart';
-import 'package:ligo_app/core/widgets/widgets.dart';
-import 'package:ligo_app/features/movements/domain/cubits/movements/movements_cubit.dart';
+import 'package:ligo_app/features/movements/presentation/cubits/movements/movements_cubit.dart';
 
 /// A widget that displays an error message when there is an error
 /// loading the movements.
