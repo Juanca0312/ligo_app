@@ -22,4 +22,18 @@ final class AuthInterceptor extends Interceptor {
 
     handler.next(options);
   }
+
+  @override
+  Future<void> onError(
+    DioException err,
+    ErrorInterceptorHandler handler,
+  ) async {
+    final statusCode = err.response?.statusCode;
+
+    if (statusCode == 401) {
+      await _sessionManager.clearSession();
+    }
+
+    handler.next(err);
+  }
 }
