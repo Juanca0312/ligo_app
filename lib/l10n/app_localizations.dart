@@ -207,6 +207,12 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Tu sesión ha expirado.'**
   String get sessionExpired;
+
+  /// No description provided for @movementsEmpty.
+  ///
+  /// In es, this message translates to:
+  /// **'No tienes movimientos registrados.'**
+  String get movementsEmpty;
 }
 
 class _AppLocalizationsDelegate

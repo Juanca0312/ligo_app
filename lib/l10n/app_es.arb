@@ -17,5 +17,6 @@
     "income": "Ingresos",
     "outcome": "Salidas",
     "filterByStatusType": "Filtra por tipo",
-    "sessionExpired": "Tu sesión ha expirado."
+    "sessionExpired": "Tu sesión ha expirado.",
+    "movementsEmpty": "No tienes movimientos registrados."
 }

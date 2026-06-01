@@ -67,4 +67,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get sessionExpired => 'Tu sesión ha expirado.';
+
+  @override
+  String get movementsEmpty => 'No tienes movimientos registrados.';
 }

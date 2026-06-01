@@ -124,6 +124,9 @@ class _MovementList extends StatelessWidget {
           if (state.isLoading) {
             return const MovementsSkeletonList();
           }
+          if (state.isEmpty) {
+            return const MovementsEmpty();
+          }
           return ListView.separated(
             itemCount: state.movements.length,
             itemBuilder: (context, index) {
