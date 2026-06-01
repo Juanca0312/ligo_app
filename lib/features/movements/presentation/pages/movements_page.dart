@@ -77,8 +77,17 @@ class _MovementFilterDropdown extends StatelessWidget {
             ),
           )
           .toList(),
-      onChanged: (item) {},
+      onChanged: (item) => _onFilterChanged(context, item),
     );
+  }
+
+  void _onFilterChanged(BuildContext context, LigoDropdownMenuItem? item) {
+    final filterItem = item == null
+        ? null
+        : MovementFilterItem.values.firstWhere(
+            (filter) => filter.toString() == item.id,
+          );
+    context.read<MovementsCubit>().filterMovements(filterItem);
   }
 }
 

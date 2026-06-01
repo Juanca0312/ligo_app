@@ -6,6 +6,7 @@ class MovementsState extends Equatable {
   const MovementsState({
     this.requestStatus = RequestStatus.initial,
     this.movements = const [],
+    this.allMovements = const [],
     this.failure,
   });
 
@@ -14,6 +15,9 @@ class MovementsState extends Equatable {
 
   /// List of movements to display
   final List<Movement> movements;
+
+  /// Complete list of movements
+  final List<Movement> allMovements;
 
   /// Failure if request fails
   final Failure? failure;
@@ -34,11 +38,13 @@ class MovementsState extends Equatable {
   MovementsState copyWith({
     RequestStatus? requestStatus,
     List<Movement>? movements,
+    List<Movement>? allMovements,
     Failure? failure,
   }) {
     return MovementsState(
       requestStatus: requestStatus ?? this.requestStatus,
       movements: movements ?? this.movements,
+      allMovements: allMovements ?? this.allMovements,
       failure: failure,
     );
   }
@@ -47,6 +53,7 @@ class MovementsState extends Equatable {
   List<Object?> get props => [
     requestStatus,
     movements,
+    allMovements,
     failure,
   ];
 }
