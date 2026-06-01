@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ligo_app/core/theme/ligo_color.dart';
 
 /// A custom button widget for the Ligo app.
 class LigoButton extends StatelessWidget {
@@ -28,7 +29,9 @@ class LigoButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: isEnabled ? onPressed : null,
       child: isLoading
-          ? const CircularProgressIndicator()
+          ? const CircularProgressIndicator(
+              color: LigoColor.white,
+            )
           : Text(
               text,
             ),

@@ -22,6 +22,9 @@ class AuthState extends Equatable {
   /// Returns true if the form is valid
   bool get isFormValid => email.isValid && password.isValid;
 
+  /// Returns true if the authentication request is currently loading
+  bool get isLoading => authRequestStatus == RequestStatus.loading;
+
   /// Creates a copy of the current [AuthState] with optional new values.
   AuthState copyWith({
     RequestStatus? authRequestStatus,

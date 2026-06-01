@@ -9,6 +9,14 @@ import 'package:ligo_app/core/secure_storage/secure_storage_service.dart';
 import 'package:ligo_app/core/secure_storage/secure_storage_service_impl.dart';
 import 'package:ligo_app/core/session_manager/session_manager.dart';
 import 'package:ligo_app/core/session_manager/session_manager_impl.dart';
+import 'package:ligo_app/features/auth/data/datasources/auth_datasource.dart';
+import 'package:ligo_app/features/auth/data/datasources/auth_datasource_impl.dart';
+import 'package:ligo_app/features/auth/data/repositories/auth_repository_impl.dart';
+import 'package:ligo_app/features/auth/domain/cubits/auth/auth_cubit.dart';
+import 'package:ligo_app/features/auth/domain/repositories/auth_repository.dart';
+import 'package:ligo_app/features/auth/domain/validators/email_validator.dart';
+import 'package:ligo_app/features/auth/domain/validators/login_form_validator.dart';
+import 'package:ligo_app/features/auth/domain/validators/password_validator.dart';
 
 /// Service locator for dependency injection using GetIt.
 final GetIt getIt = GetIt.instance;
@@ -31,5 +39,27 @@ void setupDependencies() {
     )
     ..registerLazySingleton<ISessionManager>(
       () => SessionManagerImpl(getIt<ISecureStorageService>()),
+    )
+    // AUTH FEATURE
+    ..registerLazySingleton<IAuthRemoteDataSource>(
+      () => AuthDatasourceImpl(httpClient: getIt<IHttpClient>()),
+    )
+    ..registerLazySingleton<IAuthRepository>(
+      () => AuthRepositoryImpl(
+        remoteDataSource: getIt<IAuthRemoteDataSource>(),
+        sessionManager: getIt<ISessionManager>(),
+      ),
+    )
+    ..registerLazySingleton<LoginFormValidators>(
+      () => LoginFormValidatorsImpl(
+        emailValidator: EmailValidator(),
+        passwordValidator: PasswordValidator(),
+      ),
+    )
+    ..registerFactory<AuthCubit>(
+      () => AuthCubit(
+        authRepository: getIt<IAuthRepository>(),
+        validators: getIt<LoginFormValidators>(),
+      ),
     );
 }

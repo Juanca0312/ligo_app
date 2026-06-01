@@ -25,6 +25,8 @@ class AuthCubit extends Cubit<AuthState> {
 
   /// Logins the user using the email and password from the current state
   Future<void> login() async {
+    if (!state.isFormValid || state.isLoading) return;
+
     emit(state.copyWith(authRequestStatus: RequestStatus.loading));
 
     final result = await _authRepository.login(

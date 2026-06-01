@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ligo_app/core/extensions/localization_extension.dart';
 import 'package:ligo_app/core/theme/ligo_spacing.dart';
 import 'package:ligo_app/core/widgets/widgets.dart';
+import 'package:ligo_app/features/auth/domain/cubits/auth/auth_cubit.dart';
 import 'package:ligo_app/features/auth/presentation/assets/auth_assets.dart';
 
 /// Login page.
@@ -42,7 +44,11 @@ class LoginPage extends StatelessWidget {
                 LigoTextFormField(
                   hintText: context.localized.email,
                   keyboardType: TextInputType.emailAddress,
-                  onChanged: (value) {},
+                  errorText: context.select<AuthCubit, String?>(
+                    (cubit) => cubit.state.email.error?.toString(),
+                  ),
+                  onChanged: (value) =>
+                      context.read<AuthCubit>().updateEmail(value),
                 ),
 
                 const SizedBox(height: LigoSpacing.m),
@@ -50,13 +56,23 @@ class LoginPage extends StatelessWidget {
                 LigoTextFormField(
                   hintText: context.localized.password,
                   obscureText: true,
-                  onChanged: (value) {},
+                  errorText: context.select<AuthCubit, String?>(
+                    (cubit) => cubit.state.password.error?.toString(),
+                  ),
+                  onChanged: (value) =>
+                      context.read<AuthCubit>().updatePassword(value),
                 ),
 
                 const SizedBox(height: LigoSpacing.xl),
 
                 LigoButton(
-                  onPressed: () {},
+                  onPressed: () => context.read<AuthCubit>().login(),
+                  isLoading: context.select<AuthCubit, bool>(
+                    (cubit) => cubit.state.isLoading,
+                  ),
+                  isEnabled: context.select<AuthCubit, bool>(
+                    (cubit) => cubit.state.isFormValid,
+                  ),
                   text: context.localized.login,
                 ),
               ],
