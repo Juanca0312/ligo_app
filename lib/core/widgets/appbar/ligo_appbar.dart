@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ligo_app/core/extensions/text_theme_extension.dart';
 
 /// A custom app bar widget for the Ligo application.
 class LigoAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -24,7 +25,7 @@ class LigoAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       title: Text(
         title,
-        style: Theme.of(context).textTheme.headlineLarge,
+        style: context.textTheme.headlineLarge,
       ),
       actions: [
         if (onLogout != null)
