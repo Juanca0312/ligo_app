@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ligo_app/core/di/service_locator.dart';
 import 'package:ligo_app/core/router/app_router.dart';
 import 'package:ligo_app/core/theme/light_theme.dart';
+import 'package:ligo_app/features/auth/domain/cubits/session/session_cubit.dart';
 import 'package:ligo_app/l10n/app_localizations.dart';
 
 /// The main app widget for the Ligo application.
@@ -16,7 +19,10 @@ class LigoApp extends StatelessWidget {
       supportedLocales: AppLocalizations.supportedLocales,
       theme: LigoLightTheme.light,
       routerConfig: AppRouter.router,
-      builder: (context, child) => child!,
+      builder: (context, child) => BlocProvider(
+        create: (context) => getIt<SessionCubit>(),
+        child: child,
+      ),
     );
   }
 }
