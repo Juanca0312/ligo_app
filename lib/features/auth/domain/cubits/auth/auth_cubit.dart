@@ -3,10 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ligo_app/core/common/form_item.dart';
 import 'package:ligo_app/core/common/request_status.dart';
 import 'package:ligo_app/core/common/result.dart';
+import 'package:ligo_app/core/errors/failure.dart';
 import 'package:ligo_app/features/auth/domain/repositories/auth_repository.dart';
-import 'package:ligo_app/features/auth/domain/validators/email_validator.dart';
-import 'package:ligo_app/features/auth/domain/validators/login_form_validator.dart';
-import 'package:ligo_app/features/auth/domain/validators/password_validator.dart';
+import 'package:ligo_app/features/auth/domain/validators/auth_validators.dart';
 
 part 'auth_state.dart';
 
@@ -38,7 +37,12 @@ class AuthCubit extends Cubit<AuthState> {
       case Success():
         emit(state.copyWith(authRequestStatus: RequestStatus.success));
       case Error():
-        emit(state.copyWith(authRequestStatus: RequestStatus.failure));
+        emit(
+          state.copyWith(
+            authRequestStatus: RequestStatus.failure,
+            failure: result.failure,
+          ),
+        );
     }
   }
 
