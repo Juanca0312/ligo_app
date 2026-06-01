@@ -14,7 +14,7 @@ class AppRouter {
         builder: (context, state) => const SplashPage(),
       ),
       ...AuthRouter.router,
-      ...MovementsRouter.router,
+      MovementsRouter.router,
     ],
   );
 }

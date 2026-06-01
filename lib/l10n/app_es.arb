@@ -16,5 +16,6 @@
     "unknown": "Desconocido",
     "income": "Ingresos",
     "outcome": "Salidas",
-    "filterByStatusType": "Filtra por tipo"
+    "filterByStatusType": "Filtra por tipo",
+    "sessionExpired": "Tu sesión ha expirado."
 }

@@ -201,6 +201,12 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Filtra por tipo'**
   String get filterByStatusType;
+
+  /// No description provided for @sessionExpired.
+  ///
+  /// In es, this message translates to:
+  /// **'Tu sesión ha expirado.'**
+  String get sessionExpired;
 }
 
 class _AppLocalizationsDelegate

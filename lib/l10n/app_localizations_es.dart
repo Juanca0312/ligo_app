@@ -64,4 +64,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get filterByStatusType => 'Filtra por tipo';
+
+  @override
+  String get sessionExpired => 'Tu sesión ha expirado.';
 }
