@@ -213,6 +213,18 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'No tienes movimientos registrados.'**
   String get movementsEmpty;
+
+  /// No description provided for @retry.
+  ///
+  /// In es, this message translates to:
+  /// **'Reintentar'**
+  String get retry;
+
+  /// No description provided for @searchMovements.
+  ///
+  /// In es, this message translates to:
+  /// **'Busca movimiento'**
+  String get searchMovements;
 }
 
 class _AppLocalizationsDelegate

@@ -70,4 +70,10 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get movementsEmpty => 'No tienes movimientos registrados.';
+
+  @override
+  String get retry => 'Reintentar';
+
+  @override
+  String get searchMovements => 'Busca movimiento';
 }

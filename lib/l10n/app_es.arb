@@ -18,5 +18,7 @@
     "outcome": "Salidas",
     "filterByStatusType": "Filtra por tipo",
     "sessionExpired": "Tu sesión ha expirado.",
-    "movementsEmpty": "No tienes movimientos registrados."
+    "movementsEmpty": "No tienes movimientos registrados.",
+    "retry": "Reintentar",
+    "searchMovements": "Busca movimiento"
 }

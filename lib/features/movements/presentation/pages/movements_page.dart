@@ -77,6 +77,7 @@ class _MovementFilterDropdown extends StatelessWidget {
       children: [
         LigoTextFormField(
           leadingIcon: const Icon(Icons.search),
+          hintText: context.localized.searchMovements,
           onChanged: (value) =>
               context.read<MovementsCubit>().updateQuery(value),
         ),
@@ -126,6 +127,9 @@ class _MovementList extends StatelessWidget {
           }
           if (state.isEmpty) {
             return const MovementsEmpty();
+          }
+          if (state.isFailure) {
+            return const MovementsError();
           }
           return ListView.separated(
             itemCount: state.movements.length,
