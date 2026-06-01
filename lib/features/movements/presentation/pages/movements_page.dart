@@ -2,10 +2,13 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ligo_app/core/extensions/localization_extension.dart';
 import 'package:ligo_app/core/theme/ligo_color.dart';
 import 'package:ligo_app/core/theme/ligo_spacing.dart';
 import 'package:ligo_app/core/widgets/widgets.dart';
+import 'package:ligo_app/features/auth/domain/cubits/session/session_cubit.dart';
+import 'package:ligo_app/features/auth/presentation/routes/auth_routes.dart';
 import 'package:ligo_app/features/movements/domain/cubits/movements/movements_cubit.dart';
 import 'package:ligo_app/features/movements/domain/entities/movement_filter.dart';
 import 'package:ligo_app/features/movements/presentation/widgets/widgets.dart';
@@ -31,7 +34,10 @@ class _MovementsPageState extends State<MovementsPage> {
     return Scaffold(
       appBar: LigoAppBar(
         title: context.localized.movements,
-        onLogout: () {},
+        onLogout: () {
+          unawaited(context.read<SessionCubit>().logout());
+          context.goNamed(AuthRoutes.login.name);
+        },
       ),
       body: const _MovementsView(),
     );

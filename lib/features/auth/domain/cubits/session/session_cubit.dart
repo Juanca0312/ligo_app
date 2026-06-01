@@ -32,6 +32,7 @@ class SessionCubit extends Cubit<SessionState> {
   /// Restores the user session if available, otherwise emits
   /// the unauthenticated state.
   Future<void> restoreSession() async {
+    await Future<void>.delayed(const Duration(seconds: 2));
     final session = await _sessionManager.getSession();
 
     if (session == null) {
