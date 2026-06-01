@@ -17,7 +17,7 @@ class MovementTile extends StatelessWidget {
   final VoidCallback onTap;
 
   Color get _amountColor {
-    final baseColor = _isOutcome ? LigoColor.error : LigoColor.textPrimary;
+    final baseColor = _isOutcome ? LigoColor.error : LigoColor.success;
 
     if (_isPending) {
       return baseColor.withAlpha(_isOutcome ? 150 : 85);
@@ -27,15 +27,15 @@ class MovementTile extends StatelessWidget {
   }
 
   Color get _descriptionColor {
-    return movement.status == .completed
-        ? LigoColor.textPrimary
-        : LigoColor.textSecondary;
+    return switch (movement.status) {
+      MovementStatus.completed => LigoColor.textPrimary,
+      MovementStatus.failed => LigoColor.error,
+      _ => LigoColor.textSecondary,
+    };
   }
 
   bool get _isPending => movement.status == .pending;
   bool get _isOutcome => movement.type == .outcome;
-  bool get _shouldShowStatusLabel =>
-      movement.status == .pending || movement.status == .failed;
 
   @override
   Widget build(BuildContext context) {
@@ -59,15 +59,13 @@ class MovementTile extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
 
-                  if (_shouldShowStatusLabel) ...[
-                    const SizedBox(height: LigoSpacing.xs),
-                    Text(
-                      movement.status.localized(context),
-                      style: context.textTheme.labelMedium?.copyWith(
-                        color: _descriptionColor,
-                      ),
+                  const SizedBox(height: LigoSpacing.xs),
+                  Text(
+                    movement.status.localized(context),
+                    style: context.textTheme.labelMedium?.copyWith(
+                      color: _descriptionColor,
                     ),
-                  ],
+                  ),
                 ],
               ),
             ),

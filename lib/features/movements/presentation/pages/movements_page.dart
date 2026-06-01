@@ -1,16 +1,30 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ligo_app/core/extensions/localization_extension.dart';
 import 'package:ligo_app/core/theme/ligo_color.dart';
 import 'package:ligo_app/core/theme/ligo_spacing.dart';
 import 'package:ligo_app/core/widgets/widgets.dart';
-import 'package:ligo_app/features/movements/domain/entities/movement.dart';
+import 'package:ligo_app/features/movements/domain/cubits/movements/movements_cubit.dart';
 import 'package:ligo_app/features/movements/domain/entities/movement_filter.dart';
 import 'package:ligo_app/features/movements/presentation/widgets/widgets.dart';
 
 /// A page that displays the movements of the user.
-class MovementsPage extends StatelessWidget {
+class MovementsPage extends StatefulWidget {
   /// Creates a new instance of [MovementsPage].
   const MovementsPage({super.key});
+
+  @override
+  State<MovementsPage> createState() => _MovementsPageState();
+}
+
+class _MovementsPageState extends State<MovementsPage> {
+  @override
+  void initState() {
+    unawaited(context.read<MovementsCubit>().loadMovements());
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,61 +33,87 @@ class MovementsPage extends StatelessWidget {
         title: context.localized.movements,
         onLogout: () {},
       ),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: LigoSpacing.m),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              const SizedBox(height: 24),
-              LigoDropdownButton(
-                placeholder: context.localized.filterByStatusType,
-                items: MovementFilterItem.values
-                    .map(
-                      (item) => LigoDropdownMenuItem(
-                        id: item.toString(),
-                        label: item.localized(context),
-                      ),
-                    )
-                    .toList(),
-                onChanged: (item) {},
-              ),
-              const SizedBox(height: LigoSpacing.m),
-              Expanded(
-                child: RefreshIndicator(
-                  onRefresh: () async {},
-                  child: Builder(
-                    builder: (context) {
-                      return ListView.separated(
-                        physics: const AlwaysScrollableScrollPhysics(),
-                        itemCount: 20,
-                        itemBuilder: (context, index) {
-                          final movement = Movement(
-                            id: index.toString(),
-                            description: 'Movement $index',
-                            amount: (index + 1) * 10.0,
-                            type: index.isEven ? .income : .outcome,
-                            status: index.isEven ? .completed : .pending,
-                          );
-                          return MovementTile(
-                            movement: movement,
-                            onTap: () {},
-                          );
-                        },
-                        separatorBuilder: (context, index) {
-                          return const Divider(
-                            height: 1,
-                            color: LigoColor.border,
-                          );
-                        },
-                      );
-                    },
-                  ),
-                ),
-              ),
-            ],
-          ),
+      body: const _MovementsView(),
+    );
+  }
+}
+
+class _MovementsView extends StatelessWidget {
+  const _MovementsView();
+
+  @override
+  Widget build(BuildContext context) {
+    return const SafeArea(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: LigoSpacing.m),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            SizedBox(height: 24),
+            _MovementFilterDropdown(),
+            SizedBox(height: LigoSpacing.m),
+            Expanded(
+              child: _MovementList(),
+            ),
+          ],
         ),
+      ),
+    );
+  }
+}
+
+class _MovementFilterDropdown extends StatelessWidget {
+  const _MovementFilterDropdown({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return LigoDropdownButton(
+      placeholder: context.localized.filterByStatusType,
+      items: MovementFilterItem.values
+          .map(
+            (item) => LigoDropdownMenuItem(
+              id: item.toString(),
+              label: item.localized(context),
+            ),
+          )
+          .toList(),
+      onChanged: (item) {},
+    );
+  }
+}
+
+class _MovementList extends StatelessWidget {
+  const _MovementList({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return RefreshIndicator(
+      onRefresh: () async {
+        await context.read<MovementsCubit>().loadMovements();
+      },
+      child: BlocBuilder<MovementsCubit, MovementsState>(
+        buildWhen: (previous, current) =>
+            previous.movements != current.movements ||
+            previous.requestStatus != current.requestStatus,
+        builder: (context, state) {
+          return ListView.separated(
+            physics: const AlwaysScrollableScrollPhysics(),
+            itemCount: state.movements.length,
+            itemBuilder: (context, index) {
+              final movement = state.movements[index];
+              return MovementTile(
+                movement: movement,
+                onTap: () {},
+              );
+            },
+            separatorBuilder: (context, index) {
+              return const Divider(
+                height: 1,
+                color: LigoColor.border,
+              );
+            },
+          );
+        },
       ),
     );
   }
