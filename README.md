@@ -140,6 +140,15 @@ El Session Cubit reacciona a cambios del Session Manager, permitiendo actualizar
 
 <img width="2212" height="1881" alt="diagrama_ligo" src="https://github.com/user-attachments/assets/c4e17044-9bc3-4547-9b62-7cebd4a1782b" />
 
+### UI System (Theme, spacing y componentes)
+
+La aplicación cuenta con un sistema de diseño centralizado basado en ThemeData, ColorScheme y tokens de diseño.
+
+- Tema y colores: definidos en LigoLightTheme y LigoColor, centralizando la configuración visual (colores, inputs, botones, AppBar y estados).
+- Spacing: gestionado mediante LigoSpacing, garantizando consistencia en márgenes y paddings a nivel global.
+- Extensibilidad de componentes: los componentes reutilizables se implementan en core/presentation/widgets, encapsulando widgets base de Flutter (ej. TextFormField) para estandarizar comportamiento, estilos y reusabilidad.
+- Escalabilidad: nuevos componentes deben seguir el patrón de wrappers reutilizables, desacoplados de lógica de negocio y basados en el theme system para asegurar consistencia visual.
+
 ## Capturas de pantalla
 <img height="300" alt="Simulator Screenshot - iPhone 16 Pro - 2026-06-01 at 11 02 20" src="https://github.com/user-attachments/assets/e210d52f-b3e0-42d5-ad2b-7b8ef7a070bf" />
 <img height="300" alt="Simulator Screenshot - iPhone 16 Pro - 2026-06-01 at 11 02 44" src="https://github.com/user-attachments/assets/09ce19ed-de34-4619-8041-1ec066e596f5" />
