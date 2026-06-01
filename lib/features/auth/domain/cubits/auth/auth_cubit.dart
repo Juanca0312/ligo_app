@@ -1,9 +1,12 @@
+import 'dart:async';
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ligo_app/core/common/form_item.dart';
 import 'package:ligo_app/core/common/request_status.dart';
 import 'package:ligo_app/core/common/result.dart';
 import 'package:ligo_app/core/errors/failure.dart';
+import 'package:ligo_app/features/auth/domain/cubits/session/session_cubit.dart';
 import 'package:ligo_app/features/auth/domain/repositories/auth_repository.dart';
 import 'package:ligo_app/features/auth/domain/validators/auth_validators.dart';
 
@@ -15,12 +18,15 @@ class AuthCubit extends Cubit<AuthState> {
   AuthCubit({
     required AuthRepository authRepository,
     required LoginFormValidators validators,
+    required SessionCubit sessionCubit,
   }) : _authRepository = authRepository,
        _validators = validators,
+       _sessionCubit = sessionCubit,
        super(const AuthState());
 
   final AuthRepository _authRepository;
   final LoginFormValidators _validators;
+  final SessionCubit _sessionCubit;
 
   /// Logins the user using the email and password from the current state
   Future<void> login() async {
@@ -36,6 +42,8 @@ class AuthCubit extends Cubit<AuthState> {
     switch (result) {
       case Success():
         emit(state.copyWith(authRequestStatus: RequestStatus.success));
+
+        unawaited(_sessionCubit.login(result.value));
       case Error():
         emit(
           state.copyWith(
