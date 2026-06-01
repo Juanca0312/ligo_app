@@ -67,7 +67,7 @@ class _MovementFilterDropdown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LigoDropdownButton(
+    return LigoDropdownMenu(
       placeholder: context.localized.filterByStatusType,
       items: MovementFilterItem.values
           .map(

@@ -17,9 +17,9 @@ class LigoDropdownMenuItem {
 }
 
 /// A custom dropdown button widget for the Ligo application.
-class LigoDropdownButton extends StatefulWidget {
-  /// Creates a [LigoDropdownButton] widget.
-  const LigoDropdownButton({
+class LigoDropdownMenu extends StatefulWidget {
+  /// Creates a [LigoDropdownMenu] widget.
+  const LigoDropdownMenu({
     required this.items,
     this.placeholder = '',
     this.onChanged,
@@ -36,10 +36,10 @@ class LigoDropdownButton extends StatefulWidget {
   final void Function(LigoDropdownMenuItem? item)? onChanged;
 
   @override
-  State<LigoDropdownButton> createState() => _LigoDropdownButtonState();
+  State<LigoDropdownMenu> createState() => _LigoDropdownMenuState();
 }
 
-class _LigoDropdownButtonState extends State<LigoDropdownButton> {
+class _LigoDropdownMenuState extends State<LigoDropdownMenu> {
   LigoDropdownMenuItem? _selectedItem;
   final TextEditingController _internalController = TextEditingController();
 
