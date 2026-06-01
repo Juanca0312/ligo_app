@@ -59,23 +59,63 @@ class MovementsCubit extends Cubit<MovementsState> {
   }
 
   /// Filters movements based on the selected filter item.
-  void filterMovements(MovementFilterItem? filter) {
-    final filtered = switch (filter) {
-      null => state.allMovements,
-      MovementFilterItem.income =>
-        state.allMovements
-            .where((movement) => movement.type == .income)
-            .toList(),
-      MovementFilterItem.outcome =>
-        state.allMovements
-            .where((movement) => movement.type == .outcome)
-            .toList(),
-    };
+  void updateFilter(MovementFilterItem? filter) {
+    emit(
+      state.copyWith(
+        filter: filter,
+        movements: _applyFilters(
+          source: state.allMovements,
+          filter: filter,
+          query: state.query,
+        ),
+      ),
+    );
+  }
+
+  /// Searches movements based on the provided query string.
+  void updateQuery(String query) {
+    final normalized = query.trim();
 
     emit(
       state.copyWith(
-        movements: filtered,
+        query: normalized,
+        movements: _applyFilters(
+          source: state.allMovements,
+          filter: state.filter,
+          query: normalized,
+        ),
       ),
     );
+  }
+
+  List<Movement> _applyFilters({
+    required List<Movement> source,
+    required MovementFilterItem? filter,
+    required String query,
+  }) {
+    var list = source;
+
+    switch (filter) {
+      case MovementFilterItem.income:
+        list = list.where((m) => m.type == .income).toList();
+
+      case MovementFilterItem.outcome:
+        list = list.where((m) => m.type == .outcome).toList();
+
+      case null:
+        break;
+    }
+
+    if (query.trim().isNotEmpty) {
+      final q = query.toLowerCase();
+
+      list = list
+          .where(
+            (m) => m.description.toLowerCase().contains(q),
+          )
+          .toList();
+    }
+
+    return list;
   }
 }

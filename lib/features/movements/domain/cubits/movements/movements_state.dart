@@ -7,6 +7,8 @@ class MovementsState extends Equatable {
     this.requestStatus = RequestStatus.initial,
     this.movements = const [],
     this.allMovements = const [],
+    this.filter,
+    this.query = '',
     this.failure,
   });
 
@@ -21,6 +23,12 @@ class MovementsState extends Equatable {
 
   /// Failure if request fails
   final Failure? failure;
+
+  /// Current applied filter
+  final MovementFilterItem? filter;
+
+  /// Current search query
+  final String query;
 
   /// Whether the request is loading.
   bool get isLoading => requestStatus == RequestStatus.loading;
@@ -39,15 +47,21 @@ class MovementsState extends Equatable {
     RequestStatus? requestStatus,
     List<Movement>? movements,
     List<Movement>? allMovements,
+    Object? filter = _unset,
+    String? query,
     Failure? failure,
   }) {
     return MovementsState(
       requestStatus: requestStatus ?? this.requestStatus,
       movements: movements ?? this.movements,
       allMovements: allMovements ?? this.allMovements,
+      filter: filter != _unset ? filter as MovementFilterItem? : this.filter,
+      query: query ?? this.query,
       failure: failure,
     );
   }
+
+  static const _unset = Object();
 
   @override
   List<Object?> get props => [

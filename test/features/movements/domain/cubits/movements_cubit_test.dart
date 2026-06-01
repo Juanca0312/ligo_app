@@ -129,75 +129,121 @@ void main() {
     );
   });
 
-  group('MovementsCubit - filterMovements', () {
+  group('MovementsCubit - filter + search (state driven)', () {
     final movements = [
       Movement(
         id: '1',
-        description: 'income',
+        description: 'salary income',
         amount: 10,
         type: .income,
         status: .completed,
       ),
       Movement(
         id: '2',
-        description: 'outcome',
+        description: 'food outcome',
         amount: 20,
         type: .outcome,
+        status: .completed,
+      ),
+      Movement(
+        id: '3',
+        description: 'bonus income',
+        amount: 30,
+        type: .income,
         status: .completed,
       ),
     ];
 
     blocTest<MovementsCubit, MovementsState>(
-      'should return all movements when filter is null',
+      'should apply filter income then search query',
       build: () => cubit,
       seed: () => MovementsState(
         requestStatus: RequestStatus.success,
-        movements: movements,
         allMovements: movements,
+        movements: movements,
       ),
       act: (cubit) {
         cubit
-          ..filterMovements(.income)
-          ..filterMovements(null);
+          ..updateFilter(MovementFilterItem.income)
+          ..updateQuery('salary');
       },
       expect: () => [
         predicate<MovementsState>(
-          (s) => s.movements.length == 1,
+          (s) =>
+              s.filter == MovementFilterItem.income && s.movements.length == 2,
         ),
         predicate<MovementsState>(
-          (s) => s.movements.length == 2,
-        ),
-      ],
-    );
-
-    blocTest<MovementsCubit, MovementsState>(
-      'should filter only income movements',
-      build: () => cubit,
-      seed: () => MovementsState(
-        requestStatus: RequestStatus.success,
-        movements: movements,
-        allMovements: movements,
-      ),
-      act: (cubit) => cubit.filterMovements(MovementFilterItem.income),
-      expect: () => [
-        predicate<MovementsState>(
-          (s) => s.movements.length == 1 && s.movements.first.type == .income,
+          (s) =>
+              s.query == 'salary' &&
+              s.movements.length == 1 &&
+              s.movements.first.id == '1',
         ),
       ],
     );
 
     blocTest<MovementsCubit, MovementsState>(
-      'should filter only outcome movements',
+      'should reset filter and restore all movements',
       build: () => cubit,
       seed: () => MovementsState(
         requestStatus: RequestStatus.success,
-        movements: movements,
         allMovements: movements,
+        movements: movements,
       ),
-      act: (cubit) => cubit.filterMovements(MovementFilterItem.outcome),
+      act: (cubit) {
+        cubit
+          ..updateFilter(MovementFilterItem.income)
+          ..updateFilter(null);
+      },
       expect: () => [
         predicate<MovementsState>(
-          (s) => s.movements.length == 1 && s.movements.first.type == .outcome,
+          (s) =>
+              s.filter == MovementFilterItem.income && s.movements.length == 2,
+        ),
+        predicate<MovementsState>(
+          (s) => s.filter == null && s.movements.length == 3,
+        ),
+      ],
+    );
+
+    blocTest<MovementsCubit, MovementsState>(
+      'should apply only search without filter',
+      build: () => cubit,
+      seed: () => MovementsState(
+        requestStatus: RequestStatus.success,
+        allMovements: movements,
+        movements: movements,
+      ),
+      act: (cubit) => cubit.updateQuery('bonus'),
+      expect: () => [
+        predicate<MovementsState>(
+          (s) =>
+              s.query == 'bonus' &&
+              s.movements.length == 1 &&
+              s.movements.first.id == '3',
+        ),
+      ],
+    );
+
+    blocTest<MovementsCubit, MovementsState>(
+      'should reset search when query is empty',
+      build: () => cubit,
+      seed: () => MovementsState(
+        requestStatus: RequestStatus.success,
+        allMovements: movements,
+        movements: movements,
+        query: 'test',
+      ),
+      act: (cubit) {
+        cubit
+          ..updateQuery('test')
+          ..updateQuery('');
+      },
+      expect: () => [
+        predicate<MovementsState>(
+          (s) => s.query == 'test' && s.movements.isEmpty,
+        ),
+        predicate<MovementsState>(
+          (s) => s.query == '' && s.movements.length == 3,
         ),
       ],
     );

@@ -10,6 +10,7 @@ class LigoTextFormField extends StatefulWidget {
     this.obscureText = false,
     this.errorText,
     this.keyboardType,
+    this.leadingIcon,
   });
 
   /// Callback function that is called when the text in the field changes.
@@ -27,6 +28,9 @@ class LigoTextFormField extends StatefulWidget {
 
   /// The type of keyboard to use for the text field.
   final TextInputType? keyboardType;
+
+  /// An optional leading icon to display inside the text field.
+  final Widget? leadingIcon;
 
   @override
   State<LigoTextFormField> createState() => _LigoTextFormFieldState();
@@ -57,6 +61,7 @@ class _LigoTextFormFieldState extends State<LigoTextFormField> {
       decoration: InputDecoration(
         hintText: widget.hintText,
         errorText: widget.errorText,
+        prefixIcon: widget.leadingIcon,
         suffixIcon: widget.obscureText
             ? _VisibilityButton(
                 isObscured: _isObscured,

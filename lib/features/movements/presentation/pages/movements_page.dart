@@ -67,17 +67,27 @@ class _MovementFilterDropdown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LigoDropdownMenu(
-      placeholder: context.localized.filterByStatusType,
-      items: MovementFilterItem.values
-          .map(
-            (item) => LigoDropdownMenuItem(
-              id: item.toString(),
-              label: item.localized(context),
-            ),
-          )
-          .toList(),
-      onChanged: (item) => _onFilterChanged(context, item),
+    return Column(
+      children: [
+        LigoTextFormField(
+          leadingIcon: const Icon(Icons.search),
+          onChanged: (value) =>
+              context.read<MovementsCubit>().updateQuery(value),
+        ),
+        const SizedBox(height: LigoSpacing.s),
+        LigoDropdownMenu(
+          placeholder: context.localized.filterByStatusType,
+          items: MovementFilterItem.values
+              .map(
+                (item) => LigoDropdownMenuItem(
+                  id: item.toString(),
+                  label: item.localized(context),
+                ),
+              )
+              .toList(),
+          onChanged: (item) => _onFilterChanged(context, item),
+        ),
+      ],
     );
   }
 
@@ -87,7 +97,7 @@ class _MovementFilterDropdown extends StatelessWidget {
         : MovementFilterItem.values.firstWhere(
             (filter) => filter.toString() == item.id,
           );
-    context.read<MovementsCubit>().filterMovements(filterItem);
+    context.read<MovementsCubit>().updateFilter(filterItem);
   }
 }
 
