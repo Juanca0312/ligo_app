@@ -13,4 +13,7 @@ abstract interface class SessionManager {
 
   /// Clears the current session from secure storage.
   Future<void> clearSession();
+
+  /// Provides a stream of session changes for real-time updates.
+  Stream<Session?> get sessionStream;
 }

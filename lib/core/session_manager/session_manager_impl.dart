@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:ligo_app/core/secure_storage/secure_storage_keys.dart';
@@ -11,6 +12,7 @@ final class SessionManagerImpl implements SessionManager {
   SessionManagerImpl(this._storage);
 
   final SecureStorageService _storage;
+  final _controller = StreamController<Session?>.broadcast();
 
   @override
   Future<void> saveSession(Session session) async {
@@ -21,6 +23,8 @@ final class SessionManagerImpl implements SessionManager {
         value: jsonEncode(session.user.toJson()),
       ),
     ]);
+
+    _controller.add(session);
   }
 
   @override
@@ -54,5 +58,10 @@ final class SessionManagerImpl implements SessionManager {
       _storage.delete(SecureStorageKeys.token),
       _storage.delete(SecureStorageKeys.user),
     ]);
+
+    _controller.add(null);
   }
+
+  @override
+  Stream<Session?> get sessionStream => _controller.stream;
 }

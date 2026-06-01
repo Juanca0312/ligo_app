@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ligo_app/core/session_manager/session.dart';
@@ -12,7 +14,37 @@ class SessionCubit extends Cubit<SessionState> {
   SessionCubit({
     required SessionManager sessionManager,
   }) : _sessionManager = sessionManager,
-       super(const SessionState());
+       super(const SessionState()) {
+    _listenToSession();
+  }
+
+  StreamSubscription<Session?>? _subscription;
+
+  void _listenToSession() {
+    _subscription = _sessionManager.sessionStream.listen((session) {
+      if (session == null) {
+        emit(
+          const SessionState(
+            status: SessionStatus.unauthenticated,
+          ),
+        );
+      } else {
+        emit(
+          SessionState(
+            status: SessionStatus.authenticated,
+            session: session,
+          ),
+        );
+      }
+    });
+  }
+
+  @override
+  Future<void> close() {
+    unawaited(_subscription?.cancel());
+    return super.close();
+  }
+
   final SessionManager _sessionManager;
 
   /// Logs in the user by saving the session and emitting the authenticated.
