@@ -9,5 +9,12 @@
     "invalidEmail": "Ingresa un correo electrónico válido.",
     "invalidPassword": "La contraseña debe tener al menos 6 caracteres.",
     "loginSuccess": "Bienvenido!",
-    "movements": "Movimientos"
+    "movements": "Movimientos",
+    "pending": "En proceso",
+    "completed": "Completado",
+    "failed": "Fallido",
+    "unknown": "Desconocido",
+    "income": "Ingresos",
+    "outcome": "Salidas",
+    "filterByStatusType": "Filtra por tipo"
 }

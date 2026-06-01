@@ -43,4 +43,25 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get movements => 'Movimientos';
+
+  @override
+  String get pending => 'En proceso';
+
+  @override
+  String get completed => 'Completado';
+
+  @override
+  String get failed => 'Fallido';
+
+  @override
+  String get unknown => 'Desconocido';
+
+  @override
+  String get income => 'Ingresos';
+
+  @override
+  String get outcome => 'Salidas';
+
+  @override
+  String get filterByStatusType => 'Filtra por tipo';
 }

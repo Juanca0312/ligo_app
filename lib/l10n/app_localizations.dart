@@ -159,6 +159,48 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Movimientos'**
   String get movements;
+
+  /// No description provided for @pending.
+  ///
+  /// In es, this message translates to:
+  /// **'En proceso'**
+  String get pending;
+
+  /// No description provided for @completed.
+  ///
+  /// In es, this message translates to:
+  /// **'Completado'**
+  String get completed;
+
+  /// No description provided for @failed.
+  ///
+  /// In es, this message translates to:
+  /// **'Fallido'**
+  String get failed;
+
+  /// No description provided for @unknown.
+  ///
+  /// In es, this message translates to:
+  /// **'Desconocido'**
+  String get unknown;
+
+  /// No description provided for @income.
+  ///
+  /// In es, this message translates to:
+  /// **'Ingresos'**
+  String get income;
+
+  /// No description provided for @outcome.
+  ///
+  /// In es, this message translates to:
+  /// **'Salidas'**
+  String get outcome;
+
+  /// No description provided for @filterByStatusType.
+  ///
+  /// In es, this message translates to:
+  /// **'Filtra por tipo'**
+  String get filterByStatusType;
 }
 
 class _AppLocalizationsDelegate
