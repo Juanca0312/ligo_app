@@ -63,7 +63,7 @@ class _MovementsView extends StatelessWidget {
 }
 
 class _MovementFilterDropdown extends StatelessWidget {
-  const _MovementFilterDropdown({super.key});
+  const _MovementFilterDropdown();
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +83,7 @@ class _MovementFilterDropdown extends StatelessWidget {
 }
 
 class _MovementList extends StatelessWidget {
-  const _MovementList({super.key});
+  const _MovementList();
 
   @override
   Widget build(BuildContext context) {
@@ -96,8 +96,10 @@ class _MovementList extends StatelessWidget {
             previous.movements != current.movements ||
             previous.requestStatus != current.requestStatus,
         builder: (context, state) {
+          if (state.isLoading) {
+            return const MovementsSkeletonList();
+          }
           return ListView.separated(
-            physics: const AlwaysScrollableScrollPhysics(),
             itemCount: state.movements.length,
             itemBuilder: (context, index) {
               final movement = state.movements[index];
@@ -106,12 +108,10 @@ class _MovementList extends StatelessWidget {
                 onTap: () {},
               );
             },
-            separatorBuilder: (context, index) {
-              return const Divider(
-                height: 1,
-                color: LigoColor.border,
-              );
-            },
+            separatorBuilder: (context, index) => const Divider(
+              height: 1,
+              color: LigoColor.border,
+            ),
           );
         },
       ),

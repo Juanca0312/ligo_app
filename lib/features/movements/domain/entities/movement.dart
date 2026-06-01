@@ -12,6 +12,14 @@ class Movement {
     required this.status,
   });
 
+  /// Creates a instance of [Movement] for skeleton loading state.
+  Movement.skeleton()
+    : id = '',
+      description = 'test description',
+      amount = 0.00,
+      type = MovementType.unknown,
+      status = MovementStatus.unknown;
+
   /// Unique identifier for the movement.
   final String id;
 
