@@ -7,5 +7,7 @@
     "unauthorizedError": "No se pudo verificar tu identidad. Intenta nuevamente.",
     "fieldRequired": "Este campo es obligatorio.",
     "invalidEmail": "Ingresa un correo electrónico válido.",
-    "invalidPassword": "La contraseña debe tener al menos 6 caracteres."
+    "invalidPassword": "La contraseña debe tener al menos 6 caracteres.",
+    "loginSuccess": "Bienvenido!",
+    "movements": "Movimientos"
 }

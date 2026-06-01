@@ -147,6 +147,18 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'La contraseña debe tener al menos 6 caracteres.'**
   String get invalidPassword;
+
+  /// No description provided for @loginSuccess.
+  ///
+  /// In es, this message translates to:
+  /// **'Bienvenido!'**
+  String get loginSuccess;
+
+  /// No description provided for @movements.
+  ///
+  /// In es, this message translates to:
+  /// **'Movimientos'**
+  String get movements;
 }
 
 class _AppLocalizationsDelegate

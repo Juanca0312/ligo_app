@@ -37,4 +37,10 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get invalidPassword =>
       'La contraseña debe tener al menos 6 caracteres.';
+
+  @override
+  String get loginSuccess => 'Bienvenido!';
+
+  @override
+  String get movements => 'Movimientos';
 }

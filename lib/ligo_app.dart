@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ligo_app/app/router/app_router.dart';
+import 'package:ligo_app/core/router/app_router.dart';
 import 'package:ligo_app/core/theme/light_theme.dart';
 import 'package:ligo_app/l10n/app_localizations.dart';
 

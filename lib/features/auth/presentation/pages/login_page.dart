@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ligo_app/core/extensions/failure_localization_extension.dart';
 import 'package:ligo_app/core/extensions/localization_extension.dart';
 import 'package:ligo_app/core/theme/ligo_spacing.dart';
@@ -7,6 +8,7 @@ import 'package:ligo_app/core/widgets/widgets.dart';
 import 'package:ligo_app/features/auth/domain/cubits/auth/auth_cubit.dart';
 import 'package:ligo_app/features/auth/domain/validators/auth_validators.dart';
 import 'package:ligo_app/features/auth/presentation/assets/auth_assets.dart';
+import 'package:ligo_app/features/movements/presentation/routes/movements_routes.dart';
 
 /// The login page of the application, allowing users to enter their credentials
 class LoginPage extends StatelessWidget {
@@ -20,7 +22,12 @@ class LoginPage extends StatelessWidget {
           previous.authRequestStatus != current.authRequestStatus,
       listener: (context, state) {
         if (state.isSuccess) {
-          // navegar
+          LigoSnackBar.show(
+            context,
+            type: .success,
+            message: context.localized.loginSuccess,
+          );
+          context.goNamed(MovementsRoutes.movements.name);
         }
 
         if (state.isFailure) {
