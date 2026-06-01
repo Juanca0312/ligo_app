@@ -66,6 +66,12 @@ abstract final class LigoLightTheme {
           ),
         ),
       ),
+
+      appBarTheme: const AppBarTheme(
+        backgroundColor: LigoColor.background,
+        foregroundColor: LigoColor.textPrimary,
+        elevation: 0,
+      ),
     );
   }
 }
