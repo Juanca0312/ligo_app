@@ -29,6 +29,10 @@ void main() {
   setUp(() {
     sessionManager = MockSessionManager();
 
+    when(
+      () => sessionManager.sessionStream,
+    ).thenAnswer((_) => const Stream<Session?>.empty());
+
     cubit = SessionCubit(
       sessionManager: sessionManager,
     );
