@@ -1,7 +1,7 @@
 import 'package:ligo_app/core/session_manager/session.dart';
 
 /// Interface for managing user sessions
-abstract interface class ISessionManager {
+abstract interface class SessionManager {
   /// Saves the given session to secure storage.
   Future<void> saveSession(Session session);
 

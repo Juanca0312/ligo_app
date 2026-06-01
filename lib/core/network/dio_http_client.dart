@@ -4,8 +4,8 @@ import 'package:ligo_app/core/network/error_mapper.dart';
 import 'package:ligo_app/core/network/http_client.dart';
 import 'package:ligo_app/core/network/http_response.dart';
 
-/// Implementation of [IHttpClient] using the Dio package.
-class DioHttpClient implements IHttpClient {
+/// Implementation of [LigoHttpClient] using the Dio package.
+class DioHttpClient implements LigoHttpClient {
   /// Creates a new instance of [DioHttpClient] with the provided Dio instance.
   DioHttpClient(this.dio);
 

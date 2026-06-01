@@ -8,7 +8,7 @@ import 'package:ligo_app/features/auth/domain/repositories/auth_repository.dart'
 import 'package:ligo_app/features/auth/domain/validators/login_form_validator.dart';
 import 'package:mocktail/mocktail.dart';
 
-class MockAuthRepository extends Mock implements IAuthRepository {}
+class MockAuthRepository extends Mock implements AuthRepository {}
 
 class MockValidators extends Mock implements LoginFormValidators {}
 

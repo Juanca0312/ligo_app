@@ -6,11 +6,11 @@ import 'package:ligo_app/core/session_manager/session.dart';
 import 'package:ligo_app/core/session_manager/session_manager.dart';
 
 /// Implementation of the SessionManager interface that uses secure storage
-final class SessionManagerImpl implements ISessionManager {
+final class SessionManagerImpl implements SessionManager {
   /// Creates an instance of [SessionManagerImpl]
   SessionManagerImpl(this._storage);
 
-  final ISecureStorageService _storage;
+  final SecureStorageService _storage;
 
   @override
   Future<void> saveSession(Session session) async {

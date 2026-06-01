@@ -11,15 +11,15 @@ part 'auth_state.dart';
 
 /// Cubit class for managing authentication state and logic.
 class AuthCubit extends Cubit<AuthState> {
-  /// Creates a new instance of [AuthCubit] with the given [IAuthRepository].
+  /// Creates a new instance of [AuthCubit] with the given [AuthRepository].
   AuthCubit({
-    required IAuthRepository authRepository,
+    required AuthRepository authRepository,
     required LoginFormValidators validators,
   }) : _authRepository = authRepository,
        _validators = validators,
        super(const AuthState());
 
-  final IAuthRepository _authRepository;
+  final AuthRepository _authRepository;
   final LoginFormValidators _validators;
 
   /// Logins the user using the email and password from the current state

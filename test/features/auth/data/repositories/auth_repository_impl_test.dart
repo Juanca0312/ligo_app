@@ -10,9 +10,9 @@ import 'package:ligo_app/features/auth/data/models/user_model.dart';
 import 'package:ligo_app/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:mocktail/mocktail.dart';
 
-class MockAuthRemoteDataSource extends Mock implements IAuthRemoteDataSource {}
+class MockAuthRemoteDataSource extends Mock implements AuthDataSource {}
 
-class MockSessionManager extends Mock implements ISessionManager {}
+class MockSessionManager extends Mock implements SessionManager {}
 
 class FakeSession extends Fake implements Session {}
 

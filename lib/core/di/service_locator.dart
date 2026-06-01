@@ -26,28 +26,28 @@ void setupDependencies() {
   // Core
   getIt
     ..registerLazySingleton<AuthInterceptor>(
-      () => AuthInterceptor(getIt<ISessionManager>()),
+      () => AuthInterceptor(getIt<SessionManager>()),
     )
     ..registerLazySingleton<Dio>(
       () => DioConfig.create([getIt<AuthInterceptor>()]),
     )
-    ..registerLazySingleton<IHttpClient>(
+    ..registerLazySingleton<LigoHttpClient>(
       () => DioHttpClient(getIt<Dio>()),
     )
-    ..registerLazySingleton<ISecureStorageService>(
+    ..registerLazySingleton<SecureStorageService>(
       () => SecureStorageServiceImpl(const FlutterSecureStorage()),
     )
-    ..registerLazySingleton<ISessionManager>(
-      () => SessionManagerImpl(getIt<ISecureStorageService>()),
+    ..registerLazySingleton<SessionManager>(
+      () => SessionManagerImpl(getIt<SecureStorageService>()),
     )
     // AUTH FEATURE
-    ..registerLazySingleton<IAuthRemoteDataSource>(
-      () => AuthDatasourceImpl(httpClient: getIt<IHttpClient>()),
+    ..registerLazySingleton<AuthDataSource>(
+      () => AuthDatasourceImpl(httpClient: getIt<LigoHttpClient>()),
     )
-    ..registerLazySingleton<IAuthRepository>(
+    ..registerLazySingleton<AuthRepository>(
       () => AuthRepositoryImpl(
-        remoteDataSource: getIt<IAuthRemoteDataSource>(),
-        sessionManager: getIt<ISessionManager>(),
+        remoteDataSource: getIt<AuthDataSource>(),
+        sessionManager: getIt<SessionManager>(),
       ),
     )
     ..registerLazySingleton<LoginFormValidators>(
@@ -58,7 +58,7 @@ void setupDependencies() {
     )
     ..registerFactory<AuthCubit>(
       () => AuthCubit(
-        authRepository: getIt<IAuthRepository>(),
+        authRepository: getIt<AuthRepository>(),
         validators: getIt<LoginFormValidators>(),
       ),
     );

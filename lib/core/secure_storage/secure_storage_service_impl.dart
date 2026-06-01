@@ -3,7 +3,7 @@ import 'package:ligo_app/core/secure_storage/secure_storage_service.dart';
 
 /// Implementation of the secure storage service using the
 /// flutter_secure_storage package.
-final class SecureStorageServiceImpl implements ISecureStorageService {
+final class SecureStorageServiceImpl implements SecureStorageService {
   /// Creates an instance of [SecureStorageServiceImpl]
   SecureStorageServiceImpl(this._storage);
 

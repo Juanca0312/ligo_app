@@ -1,7 +1,7 @@
 import 'package:ligo_app/core/network/http_response.dart';
 
-///  Contract for HTTP operations used across the app.
-abstract class IHttpClient {
+/// Contract for HTTP operations used across the app.
+abstract class LigoHttpClient {
   /// Performs a GET request.
   Future<HttpResponse<T>> get<T>(
     String path, {

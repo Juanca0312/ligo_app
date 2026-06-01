@@ -7,19 +7,19 @@ import 'package:ligo_app/features/auth/data/datasources/auth_datasource.dart';
 import 'package:ligo_app/features/auth/data/mappers/session_mapper.dart';
 import 'package:ligo_app/features/auth/domain/repositories/auth_repository.dart';
 
-/// Implementation of the [IAuthRepository] interface, responsible for handling
+/// Implementation of the [AuthRepository] interface, responsible for handling
 /// user authentication operations by interacting with the remote data source
 /// and managing the user session.
-final class AuthRepositoryImpl implements IAuthRepository {
+final class AuthRepositoryImpl implements AuthRepository {
   /// Creates a new instance of [AuthRepositoryImpl]
   AuthRepositoryImpl({
-    required IAuthRemoteDataSource remoteDataSource,
-    required ISessionManager sessionManager,
+    required AuthDataSource remoteDataSource,
+    required SessionManager sessionManager,
   }) : _remoteDataSource = remoteDataSource,
        _sessionManager = sessionManager;
 
-  final IAuthRemoteDataSource _remoteDataSource;
-  final ISessionManager _sessionManager;
+  final AuthDataSource _remoteDataSource;
+  final SessionManager _sessionManager;
 
   @override
   Future<Result<void>> login({

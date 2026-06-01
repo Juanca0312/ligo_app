@@ -7,7 +7,7 @@ final class AuthInterceptor extends Interceptor {
   /// Creates a new instance of [AuthInterceptor]
   AuthInterceptor(this._sessionManager);
 
-  final ISessionManager _sessionManager;
+  final SessionManager _sessionManager;
 
   @override
   Future<void> onRequest(

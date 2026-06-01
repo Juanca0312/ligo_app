@@ -7,7 +7,7 @@ import 'package:ligo_app/features/auth/data/datasources/auth_datasource_impl.dar
 import 'package:ligo_app/features/auth/data/models/session_model.dart';
 import 'package:mocktail/mocktail.dart';
 
-class MockHttpClient extends Mock implements IHttpClient {}
+class MockHttpClient extends Mock implements LigoHttpClient {}
 
 void main() {
   late MockHttpClient mockHttpClient;

@@ -1,6 +1,6 @@
 /// Contract for the secure storage service, which is responsible for
 /// securely storing sensitive data
-abstract interface class ISecureStorageService {
+abstract interface class SecureStorageService {
   /// Writes a value to secure storage with the given key.
   Future<void> write({
     required String key,

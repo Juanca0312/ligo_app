@@ -4,13 +4,13 @@ import 'package:ligo_app/features/auth/data/auth_endpoints.dart';
 import 'package:ligo_app/features/auth/data/datasources/auth_datasource.dart';
 import 'package:ligo_app/features/auth/data/models/session_model.dart';
 
-/// Implementation of  [IAuthRemoteDataSource] for authentication operations.
-final class AuthDatasourceImpl implements IAuthRemoteDataSource {
-  /// Constructs an [AuthDatasourceImpl] with the required [IHttpClient].
-  AuthDatasourceImpl({required IHttpClient httpClient})
+/// Implementation of  [AuthDataSource] for authentication operations.
+final class AuthDatasourceImpl implements AuthDataSource {
+  /// Constructs an [AuthDatasourceImpl] with the required [LigoHttpClient].
+  AuthDatasourceImpl({required LigoHttpClient httpClient})
     : _httpClient = httpClient;
 
-  final IHttpClient _httpClient;
+  final LigoHttpClient _httpClient;
 
   @override
   Future<SessionModel> login({
