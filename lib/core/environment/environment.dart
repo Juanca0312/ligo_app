@@ -8,11 +8,12 @@ abstract final class Environment {
   Environment._();
 
   /// Base URL of the REST API.
-  static final String apiUrl = _requiredEnv('API_URL');
+  static final String apiUrl = _requiredEnv(
+    const String.fromEnvironment('API_URL'),
+    'API_URL',
+  );
 
-  static String _requiredEnv(String name) {
-    final value = String.fromEnvironment(name);
-
+  static String _requiredEnv(String value, String name) {
     if (value.isEmpty) {
       throw EnvironmentVarNotFoundException(
         message:
@@ -20,7 +21,6 @@ abstract final class Environment {
             'Pass it using --dart-define or --dart-define-from-file.',
       );
     }
-
     return value;
   }
 }
