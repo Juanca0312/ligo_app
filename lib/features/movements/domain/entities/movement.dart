@@ -26,4 +26,8 @@ class Movement {
 
   /// Status of the movement
   final MovementStatus status;
+
+  /// Returns a formatted string representation of the movement amount
+  String get amountFormatted =>
+      '${type == .outcome ? '-' : ''} S/.${amount.toStringAsFixed(2)}';
 }
