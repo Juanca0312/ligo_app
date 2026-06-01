@@ -32,7 +32,7 @@ class SessionCubit extends Cubit<SessionState> {
         emit(
           SessionState(
             status: SessionStatus.authenticated,
-            session: session,
+            sessionUser: session.user,
           ),
         );
       }
@@ -51,7 +51,7 @@ class SessionCubit extends Cubit<SessionState> {
   Future<void> login(Session session) async {
     await _sessionManager.saveSession(session);
 
-    emit(SessionState(status: .authenticated, session: session));
+    emit(SessionState(status: .authenticated, sessionUser: session.user));
   }
 
   /// Logs out the user by clearing the session and emitting the unauthenticated
@@ -72,6 +72,6 @@ class SessionCubit extends Cubit<SessionState> {
       return;
     }
 
-    emit(SessionState(status: .authenticated, session: session));
+    emit(SessionState(status: .authenticated, sessionUser: session.user));
   }
 }

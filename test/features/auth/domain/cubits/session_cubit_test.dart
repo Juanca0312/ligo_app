@@ -50,7 +50,8 @@ void main() {
       expect: () => [
         predicate<SessionState>(
           (s) =>
-              s.status == SessionStatus.authenticated && s.session == tSession,
+              s.status == SessionStatus.authenticated &&
+              s.sessionUser == tSession.user,
         ),
       ],
       verify: (_) {
@@ -70,7 +71,9 @@ void main() {
       act: (cubit) => cubit.logout(),
       expect: () => [
         predicate<SessionState>(
-          (s) => s.status == SessionStatus.unauthenticated && s.session == null,
+          (s) =>
+              s.status == SessionStatus.unauthenticated &&
+              s.sessionUser == null,
         ),
       ],
       verify: (_) {
@@ -93,7 +96,8 @@ void main() {
       expect: () => [
         predicate<SessionState>(
           (s) =>
-              s.status == SessionStatus.authenticated && s.session == tSession,
+              s.status == SessionStatus.authenticated &&
+              s.sessionUser == tSession.user,
         ),
       ],
       verify: (_) {
@@ -111,7 +115,9 @@ void main() {
       act: (cubit) => cubit.restoreSession(),
       expect: () => [
         predicate<SessionState>(
-          (s) => s.status == SessionStatus.unauthenticated && s.session == null,
+          (s) =>
+              s.status == SessionStatus.unauthenticated &&
+              s.sessionUser == null,
         ),
       ],
       verify: (_) {
