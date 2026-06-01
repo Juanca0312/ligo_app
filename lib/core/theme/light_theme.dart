@@ -70,7 +70,28 @@ abstract final class LigoLightTheme {
       appBarTheme: const AppBarTheme(
         backgroundColor: LigoColor.background,
         foregroundColor: LigoColor.textPrimary,
+        surfaceTintColor: LigoColor.background,
         elevation: 0,
+      ),
+
+      dropdownMenuTheme: const DropdownMenuThemeData(
+        inputDecorationTheme: InputDecorationTheme(
+          filled: true,
+          floatingLabelBehavior: FloatingLabelBehavior.never,
+          fillColor: LigoColor.surface,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(12)),
+            borderSide: BorderSide(color: LigoColor.border),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(12)),
+            borderSide: BorderSide(color: LigoColor.border),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(12)),
+            borderSide: BorderSide(color: LigoColor.primary, width: 2),
+          ),
+        ),
       ),
     );
   }
