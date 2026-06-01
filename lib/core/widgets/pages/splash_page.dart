@@ -3,10 +3,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:ligo_app/core/common/ligo_assets.dart';
 import 'package:ligo_app/core/theme/ligo_spacing.dart';
 import 'package:ligo_app/features/auth/domain/cubits/session/session_cubit.dart';
 import 'package:ligo_app/features/auth/domain/entities/session_status.dart';
-import 'package:ligo_app/features/auth/presentation/assets/auth_assets.dart';
 import 'package:ligo_app/features/auth/presentation/routes/auth_routes.dart';
 import 'package:ligo_app/features/movements/presentation/routes/movements_routes.dart';
 
@@ -53,7 +53,7 @@ class _SplashView extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(AuthAssets.logo, width: 150),
+            Image.asset(LigoAssets.logo, width: 150),
             const SizedBox(height: LigoSpacing.xl),
             const CircularProgressIndicator(),
           ],
