@@ -225,6 +225,30 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Busca movimiento'**
   String get searchMovements;
+
+  /// No description provided for @id.
+  ///
+  /// In es, this message translates to:
+  /// **'ID de movimiento'**
+  String get id;
+
+  /// No description provided for @amount.
+  ///
+  /// In es, this message translates to:
+  /// **'Monto'**
+  String get amount;
+
+  /// No description provided for @type.
+  ///
+  /// In es, this message translates to:
+  /// **'Tipo'**
+  String get type;
+
+  /// No description provided for @status.
+  ///
+  /// In es, this message translates to:
+  /// **'Estado'**
+  String get status;
 }
 
 class _AppLocalizationsDelegate

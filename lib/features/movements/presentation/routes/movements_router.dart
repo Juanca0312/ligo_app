@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:ligo_app/core/di/service_locator.dart';
 import 'package:ligo_app/features/auth/presentation/widgets/auth_wrapper.dart';
 import 'package:ligo_app/features/movements/domain/cubits/movements/movements_cubit.dart';
+import 'package:ligo_app/features/movements/presentation/pages/movement_detail_page.dart';
 import 'package:ligo_app/features/movements/presentation/pages/movements_page.dart';
 import 'package:ligo_app/features/movements/presentation/routes/movements_routes.dart';
 
@@ -23,6 +24,16 @@ class MovementsRouter {
         path: MovementsRoutes.movements.path,
         name: MovementsRoutes.movements.name,
         builder: (context, state) => const MovementsPage(),
+        routes: [
+          GoRoute(
+            path: MovementsRoutes.movementDetail.path,
+            name: MovementsRoutes.movementDetail.name,
+            builder: (context, state) {
+              final movementId = state.pathParameters['id']!;
+              return MovementDetailPage(movementId: movementId);
+            },
+          ),
+        ],
       ),
     ],
   );

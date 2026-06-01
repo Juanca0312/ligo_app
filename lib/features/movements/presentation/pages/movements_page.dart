@@ -11,6 +11,7 @@ import 'package:ligo_app/features/auth/domain/cubits/session/session_cubit.dart'
 import 'package:ligo_app/features/auth/presentation/routes/auth_routes.dart';
 import 'package:ligo_app/features/movements/domain/cubits/movements/movements_cubit.dart';
 import 'package:ligo_app/features/movements/domain/entities/movement_filter.dart';
+import 'package:ligo_app/features/movements/presentation/routes/movements_routes.dart';
 import 'package:ligo_app/features/movements/presentation/widgets/widgets.dart';
 
 /// A page that displays the movements of the user.
@@ -137,7 +138,10 @@ class _MovementList extends StatelessWidget {
               final movement = state.movements[index];
               return MovementTile(
                 movement: movement,
-                onTap: () {},
+                onTap: () => context.goNamed(
+                  MovementsRoutes.movementDetail.name,
+                  pathParameters: {'id': movement.id},
+                ),
               );
             },
             separatorBuilder: (context, index) => const Divider(

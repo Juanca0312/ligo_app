@@ -76,4 +76,16 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get searchMovements => 'Busca movimiento';
+
+  @override
+  String get id => 'ID de movimiento';
+
+  @override
+  String get amount => 'Monto';
+
+  @override
+  String get type => 'Tipo';
+
+  @override
+  String get status => 'Estado';
 }

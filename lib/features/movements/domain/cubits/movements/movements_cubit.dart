@@ -58,6 +58,11 @@ class MovementsCubit extends Cubit<MovementsState> {
     }
   }
 
+  /// Retrieves a movement by its ID from the current state.
+  Movement getById(String id) => state.allMovements.firstWhere(
+    (m) => m.id == id,
+  );
+
   /// Filters movements based on the selected filter item.
   void updateFilter(MovementFilterItem? filter) {
     emit(

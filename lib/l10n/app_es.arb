@@ -20,5 +20,9 @@
     "sessionExpired": "Tu sesión ha expirado.",
     "movementsEmpty": "No tienes movimientos registrados.",
     "retry": "Reintentar",
-    "searchMovements": "Busca movimiento"
+    "searchMovements": "Busca movimiento",
+    "id": "ID de movimiento",
+    "amount": "Monto",
+    "type": "Tipo",
+    "status": "Estado"
 }
