@@ -1,4 +1,6 @@
+import 'package:flutter/widgets.dart';
 import 'package:ligo_app/core/common/form_validator.dart';
+import 'package:ligo_app/core/extensions/localization_extension.dart';
 
 /// Validator for email addresses using a regex pattern.
 class EmailValidator implements Validator<String, EmailError> {
@@ -24,4 +26,15 @@ enum EmailError {
 
   /// Error indicating that the email format is invalid.
   invalid,
+}
+
+/// Extension to provide localization for [EmailError] instances.
+extension EmailErrorLocalization on EmailError {
+  /// Localizes the email error message based on the type of error.
+  String localize(BuildContext context) {
+    return switch (this) {
+      EmailError.required => context.localized.fieldRequired,
+      EmailError.invalid => context.localized.invalidEmail,
+    };
+  }
 }

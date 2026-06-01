@@ -1,15 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ligo_app/core/extensions/failure_localization_extension.dart';
 import 'package:ligo_app/core/extensions/localization_extension.dart';
 import 'package:ligo_app/core/theme/ligo_spacing.dart';
 import 'package:ligo_app/core/widgets/widgets.dart';
 import 'package:ligo_app/features/auth/domain/cubits/auth/auth_cubit.dart';
+import 'package:ligo_app/features/auth/domain/validators/auth_validators.dart';
 import 'package:ligo_app/features/auth/presentation/assets/auth_assets.dart';
 
-/// Login page.
+/// The login page of the application, allowing users to enter their credentials
 class LoginPage extends StatelessWidget {
   /// Creates a [LoginPage] widget.
   const LoginPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocListener<AuthCubit, AuthState>(
+      listenWhen: (previous, current) =>
+          previous.authRequestStatus != current.authRequestStatus,
+      listener: (context, state) {
+        if (state.isSuccess) {
+          // navegar
+        }
+
+        if (state.isFailure) {
+          LigoSnackBar.show(
+            context,
+            type: .error,
+            message:
+                state.failure?.localize(context) ??
+                context.localized.genericError,
+          );
+        }
+      },
+      child: const _LoginView(),
+    );
+  }
+}
+
+class _LoginView extends StatelessWidget {
+  const _LoginView();
 
   static const _maxFormWidth = 400.0;
 
@@ -45,7 +75,7 @@ class LoginPage extends StatelessWidget {
                   hintText: context.localized.email,
                   keyboardType: TextInputType.emailAddress,
                   errorText: context.select<AuthCubit, String?>(
-                    (cubit) => cubit.state.email.error?.toString(),
+                    (cubit) => cubit.state.email.error?.localize(context),
                   ),
                   onChanged: (value) =>
                       context.read<AuthCubit>().updateEmail(value),
@@ -57,7 +87,7 @@ class LoginPage extends StatelessWidget {
                   hintText: context.localized.password,
                   obscureText: true,
                   errorText: context.select<AuthCubit, String?>(
-                    (cubit) => cubit.state.password.error?.toString(),
+                    (cubit) => cubit.state.password.error?.localize(context),
                   ),
                   onChanged: (value) =>
                       context.read<AuthCubit>().updatePassword(value),

@@ -117,6 +117,36 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Iniciar sesión'**
   String get login;
+
+  /// No description provided for @genericError.
+  ///
+  /// In es, this message translates to:
+  /// **'Ocurrió un error inesperado. Inténtalo nuevamente.'**
+  String get genericError;
+
+  /// No description provided for @unauthorizedError.
+  ///
+  /// In es, this message translates to:
+  /// **'No se pudo verificar tu identidad. Intenta nuevamente.'**
+  String get unauthorizedError;
+
+  /// No description provided for @fieldRequired.
+  ///
+  /// In es, this message translates to:
+  /// **'Este campo es obligatorio.'**
+  String get fieldRequired;
+
+  /// No description provided for @invalidEmail.
+  ///
+  /// In es, this message translates to:
+  /// **'Ingresa un correo electrónico válido.'**
+  String get invalidEmail;
+
+  /// No description provided for @invalidPassword.
+  ///
+  /// In es, this message translates to:
+  /// **'La contraseña debe tener al menos 6 caracteres.'**
+  String get invalidPassword;
 }
 
 class _AppLocalizationsDelegate

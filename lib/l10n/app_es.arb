@@ -2,5 +2,10 @@
     "helloWorld": "Hola Mundo!",
     "email": "Correo",
     "password": "Contraseña",
-    "login": "Iniciar sesión"
+    "login": "Iniciar sesión",
+    "genericError": "Ocurrió un error inesperado. Inténtalo nuevamente.",
+    "unauthorizedError": "No se pudo verificar tu identidad. Intenta nuevamente.",
+    "fieldRequired": "Este campo es obligatorio.",
+    "invalidEmail": "Ingresa un correo electrónico válido.",
+    "invalidPassword": "La contraseña debe tener al menos 6 caracteres."
 }
